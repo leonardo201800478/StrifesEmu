@@ -23,7 +23,7 @@ Public Class Form1
                                                "Sharp X68000", "Sinclair ZX Spectrum", "Sinclair ZX-81", "Windows 3.X"}
                 comboBoxSistema.Items.AddRange(items1)
             Case "Consoles"
-                Dim items2 As String() = New String() {"Apple Pippin", "Atari 2600", "Atari 5200", "Atari 7800", "Atari Jaguar", "Atari Jaguar CD", "Casio Loopy",
+                Dim items2 As String() = New String() {"Apple Pippin", "Atari 2600", "Atari 5200", "Atari 7800", "Atari Jaguar", "Atari Jaguar CD", "Atari XEGS", "Casio Loopy",
                                                "Casio PV-1000", "ColecoVision", "Commodore CD32", "Commodore CDTV", "Emerson Arcadia 2001",
                                                "Entex Adventure Vision", "Epoch Super Cassette Vision", "Fairchild Channel F", "Fujitsu FM Towns Marty",
                                                "Magnavox Odyssey", "Magnavox Odyssey²", "Mattel Intellivision", "Microsoft Xbox", "Microsoft Xbox 360",
@@ -77,15 +77,17 @@ Public Class Form1
             Case "Atari 7800"
                 comboBoxEmulador.Items.AddRange(New String() {"BupSystem", "MAME", "A7800", "Retroarch"})
             Case "Atari 8-bit (400, 800, XL, XE)"
-                comboBoxEmulador.Items.AddRange(New String() {"Ares", "Bsnes", "Retroarch", "Mesen-S"})
+                comboBoxEmulador.Items.AddRange(New String() {"Atari800", "Retroarch", "Altirra", "Atari++", "MAME"})
             Case "Atari Jaguar"
-                comboBoxEmulador.Items.AddRange(New String() {"Ares", "Bsnes", "Retroarch", "Mesen-S"})
+                comboBoxEmulador.Items.AddRange(New String() {"BigPEmu", "BizHawk", "Retroarch"})
             Case "Atari Jaguar CD"
-                comboBoxEmulador.Items.AddRange(New String() {"Ares", "Bsnes", "Retroarch", "Mesen-S"})
+                comboBoxEmulador.Items.AddRange(New String() {"BigPEmu"})
             Case "Atari Lynx"
                 comboBoxEmulador.Items.AddRange(New String() {"Ares", "Bsnes", "Retroarch", "Mesen-S"})
             Case "Atari ST"
                 comboBoxEmulador.Items.AddRange(New String() {"Ares", "Bsnes", "Retroarch", "Mesen-S"})
+            Case "Atari XEGS "
+                comboBoxEmulador.Items.AddRange(New String() {"Altirra", "MAME", "Retroarch"})
             Case "BBC Micro"
                 comboBoxEmulador.Items.AddRange(New String() {"Ares", "Bsnes", "Retroarch", "Mesen-S"})
             Case "Casio Loopy"
@@ -314,9 +316,18 @@ Public Class Form1
             Case "Altirra"
                 Dim FormAltirra As New FormAltirra()
                 FormAltirra.Show()
+            Case "Atari++"
+                Dim FormAtariPlusPlus As New FormAtariPlusPlus()
+                FormAtariPlusPlus.Show()
             Case "BasiliskII"
                 Dim FormBasiliskII As New FormBasiliskII()
                 FormBasiliskII.Show()
+            Case "BigPEmu"
+                Dim FormBigPEmu As New FormBigPEmu()
+                FormBigPEmu.Show()
+            Case "BizHawk"
+                Dim FormBizHawk As New FormBizHawk()
+                FormBizHawk.Show()
             Case "Bsnes"
                 Dim FormBsnes As New FormBsnes()
                 FormBsnes.Show()
@@ -339,7 +350,7 @@ Public Class Form1
                 Dim FormDingusPPC As New FormDingusPPC()
                 FormDingusPPC.Show()
             Case "Higan"
-                Dim FormHigan As New FormRetroarch()
+                Dim FormHigan As New FormHigan()
                 FormHigan.Show()
             Case "Lime3DS"
                 Dim FormLime3DS As New FormLime3DS()
@@ -347,8 +358,11 @@ Public Class Form1
             Case "LisaEm"
                 Dim FormLisaEm As New FormLisaEm()
                 FormLisaEm.Show()
+            Case "MAME"
+                Dim FormMAME As New FormMAME()
+                FormMAME.Show()
             Case "Mesen-S"
-                Dim FormMesenS As New FormRetroarch()
+                Dim FormMesenS As New FormMesenS()
                 FormMesenS.Show()
             Case "Phoenix"
                 Dim FormPhoenix As New FormPhoenix()
