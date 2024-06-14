@@ -9,9 +9,18 @@
         comboBoxSistema.Items.Clear()
         comboBoxEmulador.Items.Clear()
         Select Case comboBoxModalidade.SelectedItem.ToString()
-            Case "Arcade"
-                Dim items As String() = New String() {"FB Neo", "MAME", "Cave CV1000", "Sammy Atomiswave", "Sega Hikaru", "Sega Model 2", "Sega Model 3", "Sega NAOMI",
-                                               "Sega NAOMI 2", "Gaelco PowerVR", "Sega ST-V", "SNK Neo Geo MVS", "TeknoParrot"}
+            Case "Consoles"
+                Dim items As String() = New String() {"3DO Interactive Multiplayer", "Amiga CD32", "Apple Pippin", "Atari 2600", "Atari 5200", "Atari 7800", "Atari Jaguar", "Atari Jaguar CD",
+                                                "Atari XEGS", "ColecoVision", "Commodore CDTV", "Emerson Arcadia 2001",
+                                               "Epoch Super Cassette Vision", "Fairchild Channel F", "Fujitsu FM Towns Marty",
+                                               "Magnavox Odyssey", "Magnavox Odyssey²", "Mattel Intellivision", "Microsoft Xbox", "Microsoft Xbox 360",
+                                               "Nec PC Engine (TurboGrafx-16)", "Nec PC Engine CD (TurboGrafx-CD)", "Nec PC Engine SuperGrafx", "Nec PC-FX",
+                                               "Nintendo 64", "Nintendo 64DD", "Nintendo Entertainment System", "Nintendo Famicom Disk System",
+                                               "Nintendo GameCube", "Nintendo Satellaview", "Nintendo Sufami Turbo", "Nintendo Wii", "Nintendo Wii U",
+                                               "Philips CD-i", "Sega 32X", "Sega CD", "Sega CD 32X", "Sega Dreamcast", "Sega Genesis",
+                                               "Sega Master System", "Sega Saturn", "Sega SG-1000", "SNK Neo Geo AES", "SNK Neo Geo CD", "Sony PlayStation",
+                                               "Sony PlayStation 2", "Sony PlayStation 3", "Super Cassette Vision", "Super Nintendo", "Nintendo Virtual Boy", "V.Smile",
+                                               "VTech CreatiVision", "Zeebo"}
                 comboBoxSistema.Items.AddRange(items)
             Case "Computers"
                 Dim items1 As String() = New String() {"Acorn RISC machines", "Amstrad CPC", "Apple I", "Apple II line", "Apple IIGS",
@@ -20,26 +29,18 @@
                                                "Microsoft MSX2", "MS-DOS", "NEC PC-8801", "NEC PC-9801", "ScummVM", "Sega Pico", "Sharp X1",
                                                "Sharp X68000", "Sinclair ZX Spectrum", "Sinclair ZX-81", "Windows 3.X"}
                 comboBoxSistema.Items.AddRange(items1)
-            Case "Consoles"
-                Dim items2 As String() = New String() {"Amiga CD32", "Apple Pippin", "Atari 2600", "Atari 5200", "Atari 7800", "Atari Jaguar", "Atari Jaguar CD",
-                                                "Atari XEGS", "ColecoVision", "Commodore CDTV", "Emerson Arcadia 2001",
-                                               "Epoch Super Cassette Vision", "Fairchild Channel F", "Fujitsu FM Towns Marty",
-                                               "Magnavox Odyssey", "Magnavox Odyssey²", "Mattel Intellivision", "Microsoft Xbox", "Microsoft Xbox 360",
-                                               "Nec PC Engine (TurboGrafx-16)", "Nec PC Engine CD (TurboGrafx-CD)", "Nec PC Engine SuperGrafx", "Nec PC-FX",
-                                               "Nintendo 64", "Nintendo 64DD", "Nintendo Entertainment System", "Nintendo Famicom Disk System",
-                                               "Nintendo GameCube", "Nintendo Satellaview", "Nintendo Sufami Turbo", "Nintendo Wii", "Nintendo Wii U",
-                                               "3DO Interactive Multiplayer", "Philips CD-i", "Sega 32X", "Sega CD", "Sega CD 32X", "Sega Dreamcast", "Sega Genesis",
-                                               "Sega Master System", "Sega Saturn", "Sega SG-1000", "SNK Neo Geo AES", "SNK Neo Geo CD", "Sony PlayStation",
-                                               "Sony PlayStation 2", "Sony PlayStation 3", "Super Cassette Vision", "Super Nintendo", "Nintendo Virtual Boy", "V.Smile",
-                                               "VTech CreatiVision", "Zeebo"}
-                comboBoxSistema.Items.AddRange(items2)
+
             Case "Handhelds"
-                Dim items3 As String() = New String() {"Atari Lynx", "Bandai WonderSwan", "Bandai WonderSwan Color", "Nintendo 3DS", "Nintendo DS",
+                Dim items2 As String() = New String() {"Atari Lynx", "Bandai WonderSwan", "Bandai WonderSwan Color", "Nintendo 3DS", "Nintendo DS",
                                                "Nintendo Game & Watch", "Nintendo Game Boy", "Nintendo Game Boy Advance", "Nintendo Game Boy Color",
                                                "Nintendo Pokemon mini", "Nintendo Switch", "Sega Game Gear", "SNK Neo Geo Pocket",
                                                "SNK Neo Geo Pocket Color", "Sony PlayStation Portable", "Sony PlayStation Vita", "Sony PocketStation",
                                                "Watara Super Vision"}
-                comboBoxSistema.Items.AddRange(items3)
+                comboBoxSistema.Items.AddRange(items2)
+            Case "Arcade"
+                Dim items As String() = New String() {"FB Neo", "MAME", "Cave CV1000", "Sammy Atomiswave", "Sega Hikaru", "Sega Model 2", "Sega Model 3", "Sega NAOMI",
+                                               "Sega NAOMI 2", "Gaelco PowerVR", "Sega ST-V", "SNK Neo Geo MVS", "TeknoParrot"}
+                comboBoxSistema.Items.AddRange(items)
         End Select
     End Sub
 
