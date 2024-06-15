@@ -15,13 +15,34 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="7-Zip" Version="9.22.0" />
+    <PackageReference Include="AngleSharp" Version="1.1.2" />
+    <PackageReference Include="HtmlAgilityPack.NetCore" Version="1.5.0.1" />
+    <PackageReference Include="HtmlParser.Xml" Version="1.0.0" />
+    <PackageReference Include="HttpMultipartParser" Version="8.4.0" />
+    <PackageReference Include="LZMA-SDK" Version="22.1.1" />
+    <PackageReference Include="Microsoft.Net.Http.Headers" Version="8.0.6" />
+    <PackageReference Include="MiniWebServer.HttpParser" Version="0.3.3" />
+    <PackageReference Include="MSBuild.StructuredLogger" Version="2.2.243" />
     <PackageReference Include="Octokit" Version="12.0.0" />
     <PackageReference Include="runtime.native.System.IO.Compression" Version="4.3.2" />
+    <PackageReference Include="SevenZip" Version="19.0.0" />
+    <PackageReference Include="SevenZipExtractor" Version="1.0.17" />
+    <PackageReference Include="SevenZipSharp.Interop" Version="19.1.0" />
+    <PackageReference Include="SharpCompress" Version="0.37.2" />
+    <PackageReference Include="System.Diagnostics.Debug" Version="4.3.0" />
+    <PackageReference Include="System.Diagnostics.DiagnosticSource" Version="8.0.1" />
+    <PackageReference Include="System.Diagnostics.Tools" Version="4.3.0" />
     <PackageReference Include="System.IO" Version="4.3.0" />
     <PackageReference Include="System.IO.Compression" Version="4.3.0" />
+    <PackageReference Include="System.IO.Compression.clrcompression-x64" Version="4.0.0" />
+    <PackageReference Include="System.IO.Compression.clrcompression-x86" Version="4.0.0" />
     <PackageReference Include="System.IO.Compression.ZipFile" Version="4.3.0" />
     <PackageReference Include="System.Net.Http" Version="4.3.4" />
     <PackageReference Include="System.Net.Http.Json" Version="8.0.0" />
+    <PackageReference Include="System.Xml.ReaderWriter" Version="4.3.1" />
+    <PackageReference Include="System.Xml.XDocument" Version="4.3.0" />
+    <PackageReference Include="System.Xml.XmlDocument" Version="4.3.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -50,6 +71,14 @@
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <SevenZipSharpInteropFiles Remove="7z.dll" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <SevenZipSharpInteropFiles Remove="7z.exe" />
   </ItemGroup>
 
 </Project>

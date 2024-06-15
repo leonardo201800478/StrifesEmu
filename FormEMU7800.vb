@@ -1,8 +1,9 @@
 ﻿Imports System.IO
 Imports System.IO.Compression
 Imports System.Net.Http
+Imports Octokit
 
-Public Class Form4DO
+Public Class FormEMU7800
     Inherits System.Windows.Forms.Form
 
     ' Inicialização do Formulário
@@ -11,7 +12,7 @@ Public Class Form4DO
         InitializeComponent()
 
         ' Configurações iniciais
-        VersionLabel.Text = "Emulador 4DO"
+        VersionLabel.Text = "Emulador EMU7800"
         InstallationFolderLabel.Text = "Pasta de instalação:"
         ProgressBarLabel.Text = "Progresso de download:"
         DownloadButton.Enabled = False ' Desabilita o botão de download até que um diretório de instalação seja selecionado
@@ -27,31 +28,48 @@ Public Class Form4DO
         End Using
     End Sub
 
-    ' Evento de clique no botão de download do Emulador
+    ' Evento de clique no botão de download
     Private Async Sub DownloadButton_Click(sender As Object, e As EventArgs) Handles DownloadButton.Click
-        Dim Url As String = "https://archive.org/download/4-do_20240614/4DO.zip"
-        Dim fileName As String = Path.GetFileName(Url)
-        Dim tempPath As String = Path.GetTempPath()
-        Dim downloadPath As String = Path.Combine(tempPath, fileName)
+        If String.IsNullOrEmpty(FolderPathTextBox.Text) Then
+            MessageBox.Show("Por favor, selecione a pasta de destino.")
+            Return
+        End If
 
-        Try
-            Await DownloadFileAsync(Url, downloadPath)
+        ' Crie um cliente GitHub anônimo
+        Dim client As New GitHubClient(New ProductHeaderValue("Ares"))
 
-            ' Descompacta os arquivos do Emulador
-            Dim extractPath As String = Path.Combine(tempPath, Path.GetFileNameWithoutExtension(fileName))
-            ZipFile.ExtractToDirectory(downloadPath, extractPath)
+        ' Defina o proprietário e o nome do repositório
+        Dim owner As String = "emu7800" ' Substitua pelo nome do proprietário do repositório
+        Dim repositoryName As String = "emu7800.github.io" ' Substitua pelo nome do repositório
 
-            ' Move os arquivos extraídos para o diretório de instalação
-            MoveFilesToInstallationDirectory(extractPath, FolderPathTextBox.Text)
+        ' Obtenha a versão mais recente
+        Dim releases = Await client.Repository.Release.GetAll(owner, repositoryName)
+        Dim release As Release = releases.FirstOrDefault(Function(r) Not r.Prerelease)
 
-            ' Limpa os arquivos temporários
-            Directory.Delete(extractPath, True)
-            File.Delete(downloadPath)
+        ' Verifique se há pelo menos 1 asset na release
+        If release IsNot Nothing AndAlso release.Assets.Count >= 1 Then
+            ' Pegue o primeiro asset da lista
+            Dim asset As ReleaseAsset = release.Assets(0)
 
-            MessageBox.Show("Emulador baixado e instalado com sucesso.")
-        Catch ex As Exception
-            MessageBox.Show($"Erro durante o download e instalação do emulador: {ex.Message}")
-        End Try
+            ' Inicie o download e atualize a barra de progresso
+            If asset IsNot Nothing Then
+                Dim tempPath As String = Path.GetTempPath()
+                Dim filePath As String = Path.Combine(tempPath, asset.Name)
+                Await DownloadFileAsync(asset.BrowserDownloadUrl, filePath)
+
+                ' Descompacta os arquivos diretamente na pasta de instalação, sobrescrevendo arquivos existentes
+                ExtractZipFile(filePath, FolderPathTextBox.Text)
+
+                ' Limpa os arquivos temporários
+                File.Delete(filePath)
+
+                MessageBox.Show("Download e instalação concluídos.")
+            Else
+                MessageBox.Show("Ativo não encontrado.")
+            End If
+        Else
+            MessageBox.Show("Nenhum asset encontrado na release.")
+        End If
     End Sub
 
     ' Método auxiliar para download de arquivos com progresso
@@ -61,7 +79,7 @@ Public Class Form4DO
                 Using response As HttpResponseMessage = Await httpClient.GetAsync(url, HttpCompletionOption.ResponseHeadersRead)
                     response.EnsureSuccessStatusCode()
 
-                    Using fileStream As New FileStream(destinationPath, FileMode.Create, FileAccess.Write, FileShare.None, 8192, True)
+                    Using fileStream As New FileStream(destinationPath, IO.FileMode.Create, FileAccess.Write, FileShare.None, 8192, True)
                         Using httpStream As Stream = Await response.Content.ReadAsStreamAsync()
                             Dim buffer As Byte() = New Byte(8191) {}
                             Dim bytesRead As Integer
@@ -71,10 +89,10 @@ Public Class Form4DO
                             ProgressBar.Minimum = 0
 
                             Do
-                                bytesRead = Await httpStream.ReadAsync(buffer, 0, buffer.Length)
+                                bytesRead = Await httpStream.ReadAsync(buffer)
                                 If bytesRead = 0 Then Exit Do
 
-                                Await fileStream.WriteAsync(buffer, 0, bytesRead)
+                                Await fileStream.WriteAsync(buffer.AsMemory(0, bytesRead))
                                 totalBytesRead += bytesRead
                                 ProgressBar.Value = Convert.ToInt32((totalBytesRead * 100L) / totalBytes)
                                 ProgressBarLabel.Text = $"{ProgressBar.Value}%"
@@ -86,23 +104,23 @@ Public Class Form4DO
         End Using
     End Function
 
-    ' Método auxiliar para mover arquivos extraídos para o diretório de instalação
-    Private Sub MoveFilesToInstallationDirectory(sourceDirectory As String, destinationDirectory As String)
-        ' Move todos os arquivos da pasta extraída para o diretório de instalação
-        For Each file In Directory.GetFiles(sourceDirectory, "*", SearchOption.AllDirectories)
-            Dim relativePath As String = file.Substring(sourceDirectory.Length + 1)
-            Dim destinationPath As String = Path.Combine(destinationDirectory, relativePath)
-            Dim destinationDir As String = Path.GetDirectoryName(destinationPath)
+    ' Método auxiliar para descompactar arquivos, sobrescrevendo se necessário
+    Private Sub ExtractZipFile(zipFilePath As String, extractPath As String)
+        Using archive As ZipArchive = ZipFile.OpenRead(zipFilePath)
+            For Each entry As ZipArchiveEntry In archive.Entries
+                Dim destinationPath As String = Path.Combine(extractPath, entry.FullName)
+                Dim destinationDir As String = Path.GetDirectoryName(destinationPath)
 
-            If Not Directory.Exists(destinationDir) Then
-                Directory.CreateDirectory(destinationDir)
-            End If
+                If Not Directory.Exists(destinationDir) Then
+                    Directory.CreateDirectory(destinationDir)
+                End If
 
-            If System.IO.File.Exists(destinationPath) Then
-                System.IO.File.Delete(destinationPath)
-            End If
-            System.IO.File.Move(file, destinationPath)
-        Next
+                ' Sobrescreve o arquivo se ele já existir
+                If Not String.IsNullOrEmpty(entry.Name) Then
+                    entry.ExtractToFile(destinationPath, True)
+                End If
+            Next
+        End Using
     End Sub
 
     ' Evento de clique no botão Sobre o Emulador
@@ -110,7 +128,7 @@ Public Class Form4DO
         ' Abre a página da web sobre o emulador
         Dim psi As New ProcessStartInfo()
         psi.UseShellExecute = True
-        psi.FileName = "https://emulation.gametechwiki.com/index.php/4DO"
+        psi.FileName = "https://github.com/emu7800/emu7800.github.io"
         Try
             Process.Start(psi)
         Catch ex As Exception

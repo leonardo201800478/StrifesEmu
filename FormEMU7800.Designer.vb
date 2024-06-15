@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-Partial Class Form4DO
+Partial Class FormEMU7800
     Inherits System.Windows.Forms.Form
 
     'Form substitui a memória limpeza para limpar os componentes.
@@ -34,7 +34,7 @@ Partial Class Form4DO
         ' 
         ' DownloadButton
         ' 
-        DownloadButton.Location = New Point(280, 113)
+        DownloadButton.Location = New Point(280, 115)
         DownloadButton.Margin = New Padding(4, 3, 4, 3)
         DownloadButton.Name = "DownloadButton"
         DownloadButton.Size = New Size(152, 27)
@@ -52,7 +52,7 @@ Partial Class Form4DO
         ' 
         ' ProgressBar
         ' 
-        ProgressBar.Location = New Point(14, 193)
+        ProgressBar.Location = New Point(13, 182)
         ProgressBar.Margin = New Padding(4, 3, 4, 3)
         ProgressBar.Name = "ProgressBar"
         ProgressBar.Size = New Size(416, 27)
@@ -70,7 +70,7 @@ Partial Class Form4DO
         ' 
         ' AboutButton
         ' 
-        AboutButton.Location = New Point(157, 249)
+        AboutButton.Location = New Point(169, 245)
         AboutButton.Margin = New Padding(4, 3, 4, 3)
         AboutButton.Name = "AboutButton"
         AboutButton.Size = New Size(136, 27)
@@ -81,12 +81,12 @@ Partial Class Form4DO
         ' VersionLabel
         ' 
         VersionLabel.AutoSize = True
-        VersionLabel.Location = New Point(183, 9)
+        VersionLabel.Location = New Point(169, 9)
         VersionLabel.Margin = New Padding(4, 0, 4, 0)
         VersionLabel.Name = "VersionLabel"
-        VersionLabel.Size = New Size(84, 15)
+        VersionLabel.Size = New Size(110, 15)
         VersionLabel.TabIndex = 11
-        VersionLabel.Text = "Emulador 4DO"
+        VersionLabel.Text = "Emulador EMU7800"
         ' 
         ' InstallationFolderLabel
         ' 
@@ -101,18 +101,18 @@ Partial Class Form4DO
         ' ProgressBarLabel
         ' 
         ProgressBarLabel.AutoSize = True
-        ProgressBarLabel.Location = New Point(15, 149)
+        ProgressBarLabel.Location = New Point(15, 164)
         ProgressBarLabel.Margin = New Padding(4, 0, 4, 0)
         ProgressBarLabel.Name = "ProgressBarLabel"
         ProgressBarLabel.Size = New Size(134, 15)
         ProgressBarLabel.TabIndex = 15
         ProgressBarLabel.Text = "Progresso de download:"
         ' 
-        ' Form4DO
+        ' FormEMU7800
         ' 
         AutoScaleDimensions = New SizeF(7.0F, 15.0F)
         AutoScaleMode = AutoScaleMode.Font
-        ClientSize = New Size(445, 311)
+        ClientSize = New Size(457, 318)
         Controls.Add(ProgressBarLabel)
         Controls.Add(InstallationFolderLabel)
         Controls.Add(VersionLabel)
@@ -122,8 +122,8 @@ Partial Class Form4DO
         Controls.Add(FolderPathTextBox)
         Controls.Add(DownloadButton)
         Margin = New Padding(4, 3, 4, 3)
-        Name = "Form4DO"
-        Text = "Emulador 4DO"
+        Name = "FormEMU7800"
+        Text = "Emulador EMU7800"
         ResumeLayout(False)
         PerformLayout()
 

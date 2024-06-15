@@ -76,7 +76,7 @@
             Case "Atari 5200"
                 comboBoxEmulador.Items.AddRange(New String() {"Altirra", "Retroarch"})
             Case "Atari 7800"
-                comboBoxEmulador.Items.AddRange(New String() {"BupSystem", "MAME", "A7800", "Retroarch"})
+                comboBoxEmulador.Items.AddRange(New String() {"BupSystem", "MAME", "A7800", "Retroarch", "EMU7800"})
             Case "Atari 8-bit (400, 800, XL, XE)"
                 comboBoxEmulador.Items.AddRange(New String() {"Atari800", "Retroarch", "Altirra", "Atari++", "MAME"})
             Case "Atari Jaguar"
@@ -410,6 +410,9 @@
             Case "EightyOne"
                 Dim FormEightyOne As New FormEightyOne()
                 FormEightyOne.Show()
+            Case "EMU7800"
+                Dim FormEMU7800 As New FormEMU7800()
+                FormEMU7800.Show()
             Case "Emulicious"
                 Dim FormEmulicious As New FormEmulicious()
                 FormEmulicious.Show()
